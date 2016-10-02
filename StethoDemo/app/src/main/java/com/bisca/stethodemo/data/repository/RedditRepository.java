@@ -16,8 +16,6 @@ public class RedditRepository {
 
   public RedditRepository(RedditApi redditApi) {
     this.redditApi = redditApi;
-
-    getHotGifs((param1, param2) -> notify(), param1 -> null);
   }
 
   public void getHotGifs(

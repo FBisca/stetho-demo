@@ -1,4 +1,4 @@
-package com.bisca.stethodemo.di.module;
+package com.bisca.stethodemo.di.module.ui;
 
 import com.bisca.stethodemo.di.ActivityScope;
 import com.bisca.stethodemo.view.contract.HomeContract.Presenter;

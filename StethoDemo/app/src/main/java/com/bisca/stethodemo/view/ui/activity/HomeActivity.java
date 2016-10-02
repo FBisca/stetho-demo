@@ -6,7 +6,7 @@ import android.os.PersistableBundle;
 import com.bisca.stethodemo.App;
 import com.bisca.stethodemo.R;
 import com.bisca.stethodemo.di.component.DaggerActivityComponent;
-import com.bisca.stethodemo.di.module.HomeModule;
+import com.bisca.stethodemo.di.module.ui.HomeModule;
 import com.bisca.stethodemo.view.contract.HomeContract.View;
 import com.bisca.stethodemo.view.contract.HomeContract.Presenter;
 
@@ -41,6 +41,7 @@ public class HomeActivity extends BaseActivity implements View {
 
   @Override
   public void navigateToDashScreen() {
-
+    startActivity(FeedActivity.getIntent(this));
+    finish();
   }
 }

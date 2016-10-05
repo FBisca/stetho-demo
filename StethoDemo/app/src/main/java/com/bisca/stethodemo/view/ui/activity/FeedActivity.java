@@ -29,7 +29,7 @@ public class FeedActivity extends BaseActivity implements FeedContract.View {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_feed);
     initInjector();
 
     presenter.viewCreated();

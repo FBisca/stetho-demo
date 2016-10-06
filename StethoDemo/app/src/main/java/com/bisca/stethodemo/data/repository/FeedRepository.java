@@ -4,7 +4,9 @@ import com.bisca.stethodemo.data.model.Feed;
 
 import java.util.List;
 
+import retrofit2.Call;
+
 public interface FeedRepository {
-  List<Feed> requestListFeed(String anchor);
+  Call<List<Feed>> requestListFeed();
   List<Feed> queryAllLocalFeeds();
 }

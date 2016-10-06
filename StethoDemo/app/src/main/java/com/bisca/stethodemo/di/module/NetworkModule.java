@@ -18,7 +18,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 @Module
 public class NetworkModule {
 
-  private static final String REDDIT_BASE_URL = "https://www.reddit.com/";
+  private static final String BASE_URL = "https://jsonblob.com/";
 
   @Provides
   @Singleton
@@ -34,7 +34,7 @@ public class NetworkModule {
     return new Retrofit.Builder()
         .client(httpClient)
         .addConverterFactory(MoshiConverterFactory.create())
-        .baseUrl(REDDIT_BASE_URL)
+        .baseUrl(BASE_URL)
         .build();
   }
 

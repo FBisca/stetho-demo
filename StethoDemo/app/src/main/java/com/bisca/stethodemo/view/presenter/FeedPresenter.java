@@ -6,6 +6,10 @@ import com.bisca.stethodemo.view.contract.FeedContract;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FeedPresenter implements FeedContract.Presenter {
 
   private final FeedContract.View view;
@@ -43,6 +47,17 @@ public class FeedPresenter implements FeedContract.Presenter {
 
   @Override
   public void clickedLoadFeeds() {
+    feedRepository.requestListFeed()
+        .enqueue(new Callback<List<Feed>>() {
+          @Override
+          public void onResponse(Call<List<Feed>> call, Response<List<Feed>> response) {
+            view.showFeeds(response.body());
+          }
 
+          @Override
+          public void onFailure(Call<List<Feed>> call, Throwable t) {
+
+          }
+        });
   }
 }

@@ -6,24 +6,11 @@
     android:background="@color/colorPrimary"
     android:padding="@dimen/normal_margin">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?actionBarSize">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </android.support.design.widget.AppBarLayout>
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appBar"
+        android:layout_marginTop="@dimen/normal_margin"
         android:layout_centerHorizontal="true"
         android:text="@string/stetho_demo"
         android:textColor="@color/colorAccent"

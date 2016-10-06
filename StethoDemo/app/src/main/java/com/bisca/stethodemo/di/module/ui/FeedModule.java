@@ -1,5 +1,6 @@
 package com.bisca.stethodemo.di.module.ui;
 
+import com.bisca.stethodemo.data.repository.FeedRepository;
 import com.bisca.stethodemo.di.ActivityScope;
 import com.bisca.stethodemo.view.contract.FeedContract;
 import com.bisca.stethodemo.view.presenter.FeedPresenter;
@@ -18,7 +19,7 @@ public class FeedModule {
 
   @Provides
   @ActivityScope
-  public FeedContract.Presenter providesPresenter() {
-    return new FeedPresenter(view);
+  public FeedContract.Presenter providesPresenter(FeedRepository repository) {
+    return new FeedPresenter(view, repository);
   }
 }

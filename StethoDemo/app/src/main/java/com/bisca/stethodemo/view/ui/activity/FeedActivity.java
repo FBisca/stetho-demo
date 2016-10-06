@@ -11,7 +11,7 @@ import android.view.View;
 import com.bisca.stethodemo.App;
 import com.bisca.stethodemo.R;
 import com.bisca.stethodemo.data.model.Feed;
-import com.bisca.stethodemo.di.component.DaggerActivityComponent;
+import com.bisca.stethodemo.di.component.DaggerFeedComponent;
 import com.bisca.stethodemo.di.module.ui.FeedModule;
 import com.bisca.stethodemo.view.contract.FeedContract;
 import com.bisca.stethodemo.view.contract.FeedContract.Presenter;
@@ -102,7 +102,7 @@ public class FeedActivity extends BaseActivity implements FeedContract.View {
   }
 
   private void initInjector() {
-    DaggerActivityComponent.builder()
+    DaggerFeedComponent.builder()
         .appComponent(App.getAppComponent(this))
         .feedModule(new FeedModule(this))
         .build()

@@ -1,6 +1,6 @@
 package com.bisca.stethodemo.di.module;
 
-import com.bisca.stethodemo.data.network.api.RedditApi;
+import com.bisca.stethodemo.data.network.api.FeedApi;
 
 import javax.inject.Singleton;
 
@@ -13,8 +13,8 @@ public class ApiModule {
 
   @Provides
   @Singleton
-  public RedditApi providesRedditApi(Retrofit retrofit) {
-    return retrofit.create(RedditApi.class);
+  public FeedApi providesRedditApi(Retrofit retrofit) {
+    return retrofit.create(FeedApi.class);
   }
 
 }

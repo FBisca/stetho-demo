@@ -3,7 +3,7 @@ package com.bisca.stethodemo.data.repository;
 import com.bisca.stethodemo.data.Functions;
 import com.bisca.stethodemo.data.Functions.Func2;
 import com.bisca.stethodemo.data.model.Feed;
-import com.bisca.stethodemo.data.network.api.RedditApi;
+import com.bisca.stethodemo.data.network.api.FeedApi;
 import com.bisca.stethodemo.data.network.raw.RedditHotGifResponse;
 import com.bisca.stethodemo.data.sqlite.dao.FeedDao;
 
@@ -13,13 +13,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RedditRepositoryImpl implements RedditRepository {
+public class FeedRepositoryImpl implements FeedRepository {
 
-  private final RedditApi redditApi;
+  private final FeedApi feedApi;
   private final FeedDao feedDao;
 
-  public RedditRepositoryImpl(RedditApi redditApi, FeedDao feedDao) {
-    this.redditApi = redditApi;
+  public FeedRepositoryImpl(FeedApi feedApi, FeedDao feedDao) {
+    this.feedApi = feedApi;
     this.feedDao = feedDao;
   }
 
@@ -27,7 +27,7 @@ public class RedditRepositoryImpl implements RedditRepository {
       Func2<Void, Void, Void> responseCallback,
       Functions.Func1<Throwable, Void> errorCallback
   ) {
-    redditApi.getHotGifs().enqueue(new Callback<RedditHotGifResponse>() {
+    feedApi.getHotGifs().enqueue(new Callback<RedditHotGifResponse>() {
       @Override
       public void onResponse(Call<RedditHotGifResponse> call, Response<RedditHotGifResponse> response) {
         responseCallback.invoke(null, null);
@@ -46,7 +46,7 @@ public class RedditRepositoryImpl implements RedditRepository {
   }
 
   @Override
-  public boolean hasFeedStored() {
-    return feedDao.count() > 0;
+  public List<Feed> queryAllLocalFeeds() {
+    return feedDao.queryAll();
   }
 }

@@ -4,7 +4,7 @@ import com.bisca.stethodemo.data.model.Feed;
 
 import java.util.List;
 
-public interface RedditRepository {
+public interface FeedRepository {
   List<Feed> requestListFeed(String anchor);
-  boolean hasFeedStored();
+  List<Feed> queryAllLocalFeeds();
 }

@@ -1,5 +1,12 @@
 package com.bisca.stethodemo.di.module;
 
+import android.content.Context;
+
+import com.bisca.stethodemo.StethoInitializer;
+import com.bisca.stethodemo.data.network.api.FeedApi;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,9 +22,10 @@ public class NetworkModule {
 
   @Provides
   @Singleton
-  public OkHttpClient providesHttpClient() {
-    return new OkHttpClient.Builder()
-        .build();
+  public OkHttpClient providesHttpClient(StethoInitializer initializer) {
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    initializer.addNetworkInterceptor(builder);
+    return builder.build();
   }
 
   @Provides
@@ -28,5 +36,19 @@ public class NetworkModule {
         .addConverterFactory(MoshiConverterFactory.create())
         .baseUrl(REDDIT_BASE_URL)
         .build();
+  }
+
+  @Provides
+  @Singleton
+  public Picasso providesPicasso(Context context, OkHttpClient okHttpClient) {
+    return new Picasso.Builder(context)
+        .downloader(new OkHttp3Downloader(okHttpClient))
+        .build();
+  }
+
+  @Provides
+  @Singleton
+  public FeedApi providesFeedApi(Retrofit retrofit) {
+    return retrofit.create(FeedApi.class);
   }
 }

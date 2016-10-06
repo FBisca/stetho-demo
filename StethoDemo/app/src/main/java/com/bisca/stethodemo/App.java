@@ -6,11 +6,19 @@ import android.content.Context;
 import com.bisca.stethodemo.di.component.AppComponent;
 import com.bisca.stethodemo.di.component.DaggerAppComponent;
 import com.bisca.stethodemo.di.module.AppModule;
-import com.facebook.stetho.Stetho;
+import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 public class App extends Application {
 
   private AppComponent graphComponent;
+
+  @Inject
+  public StethoInitializer stetho;
+
+  @Inject
+  public Picasso picasso;
 
   @Override
   public void onCreate() {
@@ -18,6 +26,7 @@ public class App extends Application {
 
     initInjection();
     initStetho();
+    initPicasso();
   }
 
   public static AppComponent getAppComponent(Context context) {
@@ -34,6 +43,10 @@ public class App extends Application {
   }
 
   private void initStetho() {
-    Stetho.initializeWithDefaults(this);
+    stetho.initialize(this);
+  }
+
+  private void initPicasso() {
+    Picasso.setSingletonInstance(picasso);
   }
 }

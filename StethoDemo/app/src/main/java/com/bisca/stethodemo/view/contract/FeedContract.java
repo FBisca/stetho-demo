@@ -1,21 +1,21 @@
 package com.bisca.stethodemo.view.contract;
 
-import com.bisca.stethodemo.data.model.Feed;
-
 import java.util.List;
+
+import com.bisca.stethodemo.data.model.Feed;
 
 public interface FeedContract {
   interface Presenter extends BaseContract.Presenter {
     void viewCreated();
-    void viewStarted();
-    void viewStopped();
-    void viewDestroyed();
     void clickedLoadFeeds();
+    void requestClicked();
+    void refreshClicked();
   }
 
   interface View {
     void showNoFeedStored();
     void showLoadingFeeds();
     void showFeeds(List<Feed> feedList);
+    void showXablau();
   }
 }

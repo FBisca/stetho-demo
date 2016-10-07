@@ -1,10 +1,10 @@
 package com.bisca.stethodemo.view.presenter;
 
+import java.util.List;
+
 import com.bisca.stethodemo.data.model.Feed;
 import com.bisca.stethodemo.data.repository.FeedRepository;
 import com.bisca.stethodemo.view.contract.FeedContract;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,42 +22,55 @@ public class FeedPresenter implements FeedContract.Presenter {
 
   @Override
   public void viewCreated() {
-    List<Feed> feedList = feedRepository.queryAllLocalFeeds();
-    if (feedList.isEmpty()) {
-      view.showNoFeedStored();
-    } else {
-      view.showFeeds(feedList);
-    }
-  }
-
-  @Override
-  public void viewStarted() {
-
-  }
-
-  @Override
-  public void viewStopped() {
-
-  }
-
-  @Override
-  public void viewDestroyed() {
-
+    queryDatabaseItems();
   }
 
   @Override
   public void clickedLoadFeeds() {
+    requestItems();
+  }
+
+  @Override
+  public void requestClicked() {
+    requestItems();
+  }
+
+  @Override
+  public void refreshClicked() {
+    queryDatabaseItems();
+  }
+
+  private void feedRequested(List<Feed> response) {
+    feedRepository.insertAll(response);
+    view.showFeeds(response);
+  }
+
+  private void requestItems() {
+    view.showLoadingFeeds();
     feedRepository.requestListFeed()
         .enqueue(new Callback<List<Feed>>() {
           @Override
           public void onResponse(Call<List<Feed>> call, Response<List<Feed>> response) {
-            view.showFeeds(response.body());
+            feedRequested(response.body());
           }
 
           @Override
           public void onFailure(Call<List<Feed>> call, Throwable t) {
-
           }
         });
+  }
+
+  private void queryDatabaseItems() {
+    String order = feedRepository.getOrder();
+    if (order.contains("xablau")) {
+     view.showXablau();
+    } else {
+      List<Feed> feedList = feedRepository.queryAllLocalFeeds(order.equalsIgnoreCase("asc"));
+      if (feedList.isEmpty()) {
+        view.showNoFeedStored();
+      } else {
+        view.showFeeds(feedList);
+      }
+    }
   }
 }

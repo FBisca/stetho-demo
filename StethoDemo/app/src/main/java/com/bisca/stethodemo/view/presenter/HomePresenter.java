@@ -15,4 +15,11 @@ public class HomePresenter implements Presenter {
   public void clickedStartAdventure() {
     view.navigateToDashScreen();
   }
+
+  @Override
+  public void textChanged(String text) {
+    if (text.toLowerCase().contains("surprise")) {
+      view.animateLogo();
+    }
+  }
 }

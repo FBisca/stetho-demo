@@ -12,7 +12,7 @@ public class DebugModule {
   @Provides
   @Singleton
   public StethoInitializer providesStethoInitializer() {
-    return new StethoInitializerDebug();
+    return new StethoInitializerDebug(feedDao);
   }
 
 }

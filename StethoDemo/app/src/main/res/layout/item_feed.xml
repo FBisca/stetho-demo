@@ -8,8 +8,7 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     app:cardElevation="5dp"
-    app:cardCornerRadius="5dp"
->
+    app:cardCornerRadius="5dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/doug_funny"/>
+            android:scaleType="centerCrop"/>
 
         <FrameLayout
             android:id="@+id/gradient_layout"

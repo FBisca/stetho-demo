@@ -19,7 +19,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
 
 import com.bisca.stethodemo.App;
 import com.bisca.stethodemo.R;
@@ -40,6 +39,7 @@ public class FeedActivity extends BaseActivity implements FeedContract.View {
   private Toolbar toolbar;
 
   private View xablauView;
+  private View xablau;
   private View noListView;
   private View loadingView;
   private AnimatorSet animatorSet;
@@ -80,6 +80,7 @@ public class FeedActivity extends BaseActivity implements FeedContract.View {
   }
 
   private void initActivity() {
+    xablau = findViewById(R.id.xablau);
     xablauView = findViewById(R.id.xablau_view);
     noListView = findViewById(R.id.no_feed_view);
     loadingView = findViewById(R.id.loading_view);
@@ -154,17 +155,16 @@ public class FeedActivity extends BaseActivity implements FeedContract.View {
     AnimatorSet setao = new AnimatorSet();
     AnimatorSet set0 = new AnimatorSet();
     set0.playTogether(
-        ObjectAnimator.ofFloat(xablauView, "scaleX", 1f, 0.5f),
-        ObjectAnimator.ofFloat(xablauView, "scaleY", 1f, 0.5f)
+        ObjectAnimator.ofFloat(xablau, "scaleX", 1f, 1.2f),
+        ObjectAnimator.ofFloat(xablau, "scaleY", 1f, 1.2f)
     );
-    set0.setInterpolator(new FastOutSlowInInterpolator());
 
     AnimatorSet set1 = new AnimatorSet();
     set1.playTogether(
-        ObjectAnimator.ofFloat(xablauView, "scaleX", 0.5f, 1f),
-        ObjectAnimator.ofFloat(xablauView, "scaleY", 0.5f, 1f)
+        ObjectAnimator.ofFloat(xablau, "scaleX", 1.2f, 1f),
+        ObjectAnimator.ofFloat(xablau, "scaleY", 1.2f, 1f)
     );
-    set1.setInterpolator(new BounceInterpolator());
+
     setao.addListener(new AnimatorListenerAdapter() {
         private boolean cancelled;
 
@@ -185,6 +185,7 @@ public class FeedActivity extends BaseActivity implements FeedContract.View {
           }
         }
     });
+    setao.setInterpolator(new FastOutSlowInInterpolator());
     setao.playSequentially(set0, set1);
     setao.start();
 
